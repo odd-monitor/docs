@@ -4,35 +4,86 @@ Updates are delivered through **RabbitMQ**.
 
 ## Connection
 
-- Protocol: AMQP 0.9.1  
-- Host: `rabbit.example.com`  
-- Port: `5672`  
-- VHost: `/feed`  
-- Username/Password: provided by support  
+- Protocol: AMQP 0.9.1
+- Host: `rabbit.example.com`
+- Port: `5672`
+- VHost: `/`
+- Username/Password: provided by support
 
-## Exchange
+## Event Exchange
 
-- `feed.exchange` (type: `topic`)  
+- `<client>-event` (type: `topic`)
 
 ## Routing Keys
 
-- `soccer.event.update`  
-- `basketball.event.update`  
-- `tennis.event.update`  
-- `soccer.player.update`, etc.  
+- `event.<bookmakerID>`
+
+## Message Format
+
+Example JSON:
+Headers:
+op: 'U' upsert | 'D' delete
+
+```json
+{
+  "_id": 60941915,
+  "name": "Paris Saint-Germain - Tottenham Hotspur",
+  "tournament": "UEFA Super Cup",
+  "tournamentId": 465,
+  "category": "International Clubs",
+  "categoryId": 393,
+  "sport": "Soccer",
+  "sportId": 1,
+  "date": 1755111600000,
+  "bookmakers": {
+    "1": {
+      "eventId": "2561",
+      "playability": 1,
+      "markets": {
+        "1": {
+          "sign": {
+            "1": {
+              "outcomePosition": 1,
+              "backOdd": 1.43,
+              "updt": 1748914576019
+            },
+            "2": {
+              "outcomePosition": 2,
+              "backOdd": 4.8,
+              "updt": 1748914576019
+            },
+            "3": {
+              "outcomePosition": 3,
+              "backOdd": 6.4,
+              "updt": 1748914576019
+            }
+          }
+        }
+      }
+    }
+  },
+  "_expdt": "2025-08-13T19:00:00"
+}
+```
+
+## Player Exchange
+
+- `<client>-player` (type: `topic`)
+
+## Routing Keys
+
+- `player.<sportID>.<bookmakerID>`
 
 ## Message Format
 
 Example JSON:
 
 Headers:
-
-```
-bid: 2
-op: U
-```
+bid: bookmakerID
+op: 'U' upsert | 'D' delete
 
 Message:
+
 ```json
 {
   "id": "34694653",
