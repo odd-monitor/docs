@@ -1,6 +1,6 @@
 # Getting Started
 
-1. Richiedere l’inserimento del proprio IP in whitelist al supporto tecnico.
-2. All’avvio del client:
-   - chiamare le API REST per scaricare lo snapshot iniziale
-   - collegarsi a RabbitMQ per ricevere gli aggiornamenti in tempo reale
+1. Request to have your IP whitelisted by contacting technical support.  
+2. When starting the client:  
+   - Call the REST APIs to download the initial snapshot  
+   - Connect to RabbitMQ to receive real-time updates  

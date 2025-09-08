@@ -1,12 +1,12 @@
-# Feed Quote Sportive
+# Sports Odds Feed
 
-Questo servizio fornisce un **feed di quote** per:
-- Calcio
-- Basket
+This service provides an **odds feed** for:
+- Football
+- Basketball
 - Tennis
 
-L’architettura prevede:
-1. **Snapshot iniziale via API REST** (eventi, extra, player).
-2. **Aggiornamenti in tempo reale via RabbitMQ**.
+The architecture consists of:
+1. **Initial snapshot via REST API** (events, extras, players).  
+2. **Real-time updates via RabbitMQ**.  
 
-L’accesso è consentito **solo da IP in whitelist**.
+Access is allowed **only from whitelisted IPs**.  

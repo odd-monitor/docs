@@ -1,15 +1,17 @@
-# Esempi di utilizzo
+# Demo usage
 
 ## Python Client - Snapshot
+
 ```python
 import requests
 
-url = "https://api.example.com/snapshot/events/soccer/bwin"
+url = "https://api.example.com/events/soccer/bwin"
 resp = requests.get(url)
 print(resp.json())
 ```
 
 ## Python Consumer - RabbitMQ
+
 ```python
 import pika, json
 
@@ -24,9 +26,11 @@ channel.exchange_declare(exchange="feed.exchange", exchange_type="topic")
 queue = channel.queue_declare("", exclusive=True).method.queue
 channel.queue_bind(exchange="feed.exchange", queue=queue, routing_key="soccer.event.update")
 
+
 def callback(ch, method, properties, body):
     data = json.loads(body)
     print("Ricevuto:", data)
+
 
 channel.basic_consume(queue=queue, on_message_callback=callback, auto_ack=True)
 print("In attesa di messaggi...")

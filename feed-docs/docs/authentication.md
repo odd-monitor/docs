@@ -1,9 +1,9 @@
-# Autenticazione & Sicurezza
+# Authentication & Security
 
-- L’accesso al servizio è basato su **whitelist IP**.
-- Non è richiesta API key o Bearer Token.
-- Le chiamate da IP non autorizzati ricevono `403 Forbidden`.
+- Access to the service is based on an **IP whitelist**.  
+- No API key or Bearer Token is required.  
+- Requests from unauthorized IPs will receive a `403 Forbidden` response.  
 
-## Rate Limit
-- Lato API REST: 100 richieste/minuto per IP.
-- Lato RabbitMQ: nessun limite, ma è raccomandata una sola connessione persistente per cliente.
+## Rate Limiting
+- **REST API**: 100 requests per minute per IP.  
+- **RabbitMQ**: No rate limit, but it is recommended to maintain a single persistent connection per client.  

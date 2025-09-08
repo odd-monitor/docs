@@ -1,35 +1,88 @@
-# Aggiornamenti via RabbitMQ
+# Updates via RabbitMQ
 
-Gli aggiornamenti sono inviati tramite **RabbitMQ**.
+Updates are delivered through **RabbitMQ**.
 
-## Connessione
-- Protocollo: AMQP 0.9.1
-- Host: `rabbit.example.com`
-- Porta: `5672`
-- VHost: `/feed`
-- Utente/password: forniti dal supporto
+## Connection
+
+- Protocol: AMQP 0.9.1  
+- Host: `rabbit.example.com`  
+- Port: `5672`  
+- VHost: `/feed`  
+- Username/Password: provided by support  
 
 ## Exchange
-- `feed.exchange` (tipo: `topic`)
+
+- `feed.exchange` (type: `topic`)  
 
 ## Routing Keys
-- `soccer.event.update`
-- `basketball.event.update`
-- `tennis.event.update`
-- `soccer.player.update`, ecc.
 
-## Formato Messaggi
-Esempio JSON:
+- `soccer.event.update`  
+- `basketball.event.update`  
+- `tennis.event.update`  
+- `soccer.player.update`, etc.  
+
+## Message Format
+
+Example JSON:
+
+Headers:
+
+```
+bid: 2
+op: U
+```
+
+Message:
 ```json
 {
-  "event_id": "12345",
-  "bookmaker": "bwin",
-  "market": "1x2",
-  "odds": {
-    "home": 1.85,
-    "draw": 3.20,
-    "away": 4.50
-  },
-  "timestamp": "2025-09-05T12:30:00Z"
+  "id": "34694653",
+  "date": 1757357100000,
+  "eventId": 56418485,
+  "bookmaker": 2,
+  "sportId": 1,
+  "players": {
+    "7016132": {
+      "id": "7016132",
+      "name": "John Souttar",
+      "shortName": "John Souttar",
+      "fullName": "John Souttar",
+      "markets": {
+        "Goalscorers": {
+          "#": {
+            "1st": {
+              "odd": 110,
+              "updt": 1757322314457,
+              "bSelectionId": "7016132",
+              "bMarketId": "1.247409086",
+              "marketTV": 48,
+              "runnerTV": 0
+            }
+          }
+        }
+      },
+      "team": null
+    },
+    "12977768": {
+      "id": "12977768",
+      "name": "Scott McTominay",
+      "shortName": "Scott McTominay",
+      "fullName": "Scott McTominay",
+      "markets": {
+        "Goalscorers": {
+          "#": {
+            "1st": {
+              "odd": 75,
+              "updt": 1757322314457,
+              "bSelectionId": "12977768",
+              "bMarketId": "1.247409086",
+              "marketTV": 48,
+              "runnerTV": 43
+            }
+          }
+        }
+      },
+      "team": null
+    }
+  }
 }
 ```
